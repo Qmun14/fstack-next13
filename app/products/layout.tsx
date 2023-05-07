@@ -1,0 +1,12 @@
+export const metadata = {
+  title: "Products",
+  description: "Halaman Product CRUD"
+}
+
+export default function ProductLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="py-10 px-10">
+      {children}
+    </div>
+  )
+}
