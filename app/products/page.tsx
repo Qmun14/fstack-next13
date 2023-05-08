@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import AddProduct from './addProduct';
+import DeleteProduct from './deleteProduct';
 const prisma = new PrismaClient();
 
 const getProducts = async () => {
@@ -44,7 +45,7 @@ export default async function Product() {
               <td>{product.title}</td>
               <td>{product.price}</td>
               <td>{product.brand.name}</td>
-              <td></td>
+              <td>{<DeleteProduct product={product} />}</td>
             </tr>
           ))}
         </tbody>
