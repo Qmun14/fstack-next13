@@ -42,7 +42,17 @@ const handler = NextAuth({
         }
       }
     })
-  ]
+  ],
+  callbacks: {
+    async jwt({ token, user }) {
+      return { ...token, ...user };                  //? cara menggabungkan token dan user object menjadi satu object dan me-return nya as JWT
+    },
+
+    async session({ session, token }) {
+      session.user = token as any;
+      return session;
+    }
+  }
 });
 
 export { handler as GET, handler as POST }
