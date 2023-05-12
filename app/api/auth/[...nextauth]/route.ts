@@ -1,6 +1,5 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import axios from 'axios'
 
 const handler = NextAuth({
   providers: [
@@ -17,16 +16,19 @@ const handler = NextAuth({
       },
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
-        const data = {
-          username: credentials?.username,
-          password: credentials?.password
-        }
-        const res = await axios({
+
+        const res = await fetch("http://localhost:3000/api/login", {
           method: "POST",
-          url: 'http://localhost:3000',
-          data: data
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: credentials?.username,
+            password: credentials?.password
+          })
         });
-        const user = await res.data.json();
+
+        const user = await res.json();
 
 
         if (user) {
