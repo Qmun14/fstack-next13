@@ -43,6 +43,11 @@ const handler = NextAuth({
       }
     })
   ],
+
+  pages: {
+    signIn: "/auth/signIn",
+  },
+
   callbacks: {
     async jwt({ token, user }) {
       return { ...token, ...user };                  //? cara menggabungkan token dan user object menjadi satu object dan me-return nya as JWT
